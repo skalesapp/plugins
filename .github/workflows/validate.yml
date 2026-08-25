@@ -1,0 +1,29 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install validator dependency
+        run: npm install --no-save ajv@8
+
+      - name: Validate registry
+        if: github.event_name != 'pull_request'
+        run: node scripts/validate.js
+
+      - name: Validate registry and submission diff
+        if: github.event_name == 'pull_request'
+        run: node scripts/validate.js --diff "origin/${{ github.base_ref }}"

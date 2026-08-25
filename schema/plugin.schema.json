@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/skalesapp/plugins/schema/plugin.schema.json",
+  "title": "Skales plugin manifest",
+  "description": "The shape of a plugin.json in a plugin repository, and of one entry in the registry's plugins.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "version",
+    "minAppVersion",
+    "description",
+    "author",
+    "class",
+    "platforms",
+    "permissions",
+    "repo"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Reverse-DNS identity derived from the source host: com.github.<owner>/<slug>. The owner segment must match the owner of the repository the plugin is served from.",
+      "pattern": "^com\\.github\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[a-z0-9](?:[a-z0-9-]{0,62})$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 60
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version, no leading v.",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z-.]+)?(?:\\+[0-9A-Za-z-.]+)?$"
+    },
+    "minAppVersion": {
+      "type": "string",
+      "description": "Lowest Skales app version the plugin runs on.",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200,
+      "description": "One sentence. What it does, not what it promises."
+    },
+    "author": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "class": {
+      "type": "string",
+      "description": "page renders a surface, agent answers with a model, automation runs on a schedule or a trigger.",
+      "enum": ["page", "agent", "automation"]
+    },
+    "platforms": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "enum": ["desktop", "mobile"] }
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["network", "filesystem", "tools"],
+      "properties": {
+        "network": {
+          "type": "boolean",
+          "description": "true means the plugin may reach hosts outside the app."
+        },
+        "filesystem": {
+          "type": "string",
+          "description": "none is no disk access at all; pluginRoot is the plugin's own directory and nothing above it.",
+          "enum": ["none", "pluginRoot"]
+        },
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "App tool names the plugin may call. Empty array means none."
+        }
+      }
+    },
+    "business": {
+      "type": "object",
+      "description": "Optional. Present only if the plugin is paid or has a paid tier.",
+      "additionalProperties": false,
+      "properties": {
+        "model": { "type": "string", "enum": ["free", "paid", "freemium"] },
+        "priceUrl": { "type": "string", "pattern": "^https://" },
+        "vendor": { "type": "string", "minLength": 2 }
+      },
+      "required": ["model"]
+    },
+    "repo": {
+      "type": "string",
+      "description": "GitHub repository the plugin is served from, as owner/name.",
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9._-]{1,100}$"
+    },
+    "path": {
+      "type": "string",
+      "description": "Optional subdirectory inside repo that holds the plugin. Omit if the plugin is at the repository root.",
+      "pattern": "^[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+    },
+    "homepage": { "type": "string", "pattern": "^https://" },
+    "firstParty": {
+      "type": "boolean",
+      "description": "Maintained by Skales. Only entries owned by skalesapp may set this."
+    },
+    "addedAt": {
+      "type": "string",
+      "description": "Date the entry was merged into the registry, ISO 8601 date.",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    }
+  }
+}

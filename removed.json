@@ -1,0 +1,11 @@
+{
+  "_comment": [
+    "Tombstones for plugin ids that were removed from the registry.",
+    "Append-only: entries are added, never edited and never deleted.",
+    "An id listed here is retired for good and is NEVER handed out again -",
+    "not to a renamed repository, not to a new owner, not to the same author.",
+    "CI rejects any plugins.json entry whose id appears in this file.",
+    "Entry shape: { id, removedAt (ISO date), reason }."
+  ],
+  "removed": []
+}
