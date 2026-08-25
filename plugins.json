@@ -7,11 +7,20 @@
     "description": "A morning brief written while you sleep - notes and calendar into one page",
     "author": "Skales",
     "class": "automation",
-    "platforms": ["desktop"],
+    "platforms": [
+      "desktop"
+    ],
     "permissions": {
       "network": false,
       "filesystem": "pluginRoot",
-      "tools": []
+      "tools": [
+        "list_directory",
+        "list_scheduled_tasks",
+        "list_tasks",
+        "memory_search",
+        "read_file",
+        "write_file"
+      ]
     },
     "repo": "skalesapp/plugins",
     "path": "first-party/daily-brief",
@@ -25,12 +34,16 @@
     "minAppVersion": "12.9.0",
     "description": "A reading list that works offline - save links, let the agent summarize",
     "author": "Skales",
-    "class": "page",
-    "platforms": ["desktop"],
+    "class": "agent",
+    "platforms": [
+      "desktop"
+    ],
     "permissions": {
       "network": false,
       "filesystem": "pluginRoot",
-      "tools": []
+      "tools": [
+        "extract_web_text"
+      ]
     },
     "repo": "skalesapp/plugins",
     "path": "first-party/reading-stack",
