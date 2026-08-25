@@ -2,9 +2,9 @@
   {
     "id": "com.github.skalesapp/daily-brief",
     "name": "Daily Brief",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minAppVersion": "12.9.0",
-    "description": "A morning brief written while you sleep - notes and calendar into one page",
+    "description": "A morning brief written while you sleep - calendar, notes and tasks into one page",
     "author": "Skales",
     "class": "automation",
     "platforms": [
@@ -14,6 +14,7 @@
       "network": false,
       "filesystem": "pluginRoot",
       "tools": [
+        "list_calendar_events",
         "list_directory",
         "list_scheduled_tasks",
         "list_tasks",

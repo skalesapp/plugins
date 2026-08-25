@@ -36,6 +36,33 @@ same twelve points, in the same order.
    plugin genuinely reaches a host outside the app; `filesystem: "pluginRoot"`
    rather than anything wider; list only the tools you actually call. A
    permission you do not need is a permission a reviewer will ask you to drop.
+
+   **What you may ask for.** The calendar, the address book, e-mail and the
+   messengers are all open to a plugin: a small CRM that reads the week's
+   appointments, writes a follow-up to a contact and ticks it off is exactly
+   what this surface is for. The protection is not a ban, it is the approval —
+   any tool the app classes as `confirm` produces a real card naming the
+   recipient and the content, and a person has to press it. Nothing
+   auto-approves that card, on any machine, in any mode, including a run on a
+   schedule.
+
+   A tool that sends outward but carries no `confirm` class is refused by
+   name rather than granted quietly, because there would be no card to press.
+   So `list_calendar_events` runs freely, `create_calendar_event`,
+   `send_email`, `whatsapp_send`, `slack_send_message`, `signal_send_message`
+   and `send_discord_message` run behind a card, and the Telegram send tools
+   (which post to the paired chat without asking) are not available to plugins
+   at all.
+
+   **What no plugin gets, whatever the manifest says.** The shell and arbitrary
+   code (`execute_command`, `run_script`, `register_tool`); anything that
+   writes skills or plugins, or lists them (`create_skill`, `create_plugin`,
+   `update_plugin`, `delete_plugin`, `list_plugins`, and their siblings);
+   delegation to a child run (`dispatch_subtasks`, `delegate_swarm_task`);
+   remote control of the screen and keyboard (`computer_*`,
+   `screenshot_desktop`); and `ask_user`, because a schedule has nobody at the
+   screen to answer. Listing one of these does not fail your submission, it
+   simply never runs — but a reviewer will ask you to take it off the line.
 10. **No secrets, no telemetry, no remote code loading.** No API keys in the
     repository, no phoning home, and nothing that downloads and executes code at
     runtime. A plugin that fetches its own logic at runtime is out of scope for
