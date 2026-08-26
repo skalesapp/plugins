@@ -64,6 +64,12 @@ for (const entry of Array.isArray(plugins) ? plugins : []) {
     fail(`${entry.id}: id owner "${idOwner}" does not match repo owner "${repoOwner}".`);
   }
 
+  if (entry.publicKey !== undefined) {
+    if (typeof entry.publicKey !== "string" || !/^[A-Za-z0-9+/=]{40,200}$/.test(entry.publicKey)) {
+      fail(`${entry.id}: publicKey must be base64 SPKI DER (40-200 base64 characters).`);
+    }
+  }
+
   const isSkales = repoOwner.toLowerCase() === "skalesapp";
   const slug = entry.id.split("/")[1];
   const claimsSkales = /skales/i.test(slug) || /\bskales\b/i.test(entry.name);

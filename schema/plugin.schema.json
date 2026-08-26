@@ -28,6 +28,11 @@
       "minLength": 2,
       "maxLength": 60
     },
+    "publicKey": {
+      "type": "string",
+      "description": "Optional. The author's ed25519 public key (base64 SPKI DER). If your releases ship a SIGNATURE file, this key is what turns 'not modified since signing' into 'published by you' - Skales shows your name on the green line.",
+      "pattern": "^[A-Za-z0-9+/=]{40,200}$"
+    },
     "version": {
       "type": "string",
       "description": "Semantic version, no leading v.",

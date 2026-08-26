@@ -6,6 +6,7 @@
     "minAppVersion": "12.9.0",
     "description": "A morning brief written while you sleep - calendar, notes and tasks into one page",
     "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
     "class": "automation",
     "platforms": [
       "desktop"
@@ -35,6 +36,7 @@
     "minAppVersion": "12.9.0",
     "description": "A reading list that works offline - save links, let the agent summarize",
     "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
     "class": "agent",
     "platforms": [
       "desktop"

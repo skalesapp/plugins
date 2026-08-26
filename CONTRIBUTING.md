@@ -73,6 +73,12 @@ same twelve points, in the same order.
 12. **You commit to maintaining it.** You keep it working against current Skales
     releases, you answer issues in your repository, and you tell us when you
     stop. An unmaintained entry gets removed, and its id is retired with it.
+13. **If you sign your releases, name your public key.** Optional `publicKey`
+    field on your entry (ed25519, base64 SPKI DER). Signing works without it -
+    but the key is what turns "not modified since signing" into "published by
+    you": with it, Skales shows your name on the green signature line at
+    install time. Generate the pair with the Skales DevKit or any ed25519
+    tool; the private half never leaves your machine.
 
 ## Opening the PR
 
