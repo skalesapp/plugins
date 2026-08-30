@@ -37,6 +37,15 @@ same twelve points, in the same order.
    rather than anything wider; list only the tools you actually call. A
    permission you do not need is a permission a reviewer will ask you to drop.
 
+   **`memory` is the one to think hardest about.** `"own"` gives your plugin a
+   memory store of its own that nothing else reads, and it is what you get if
+   you leave the field out. `"shared"` gives it the memory the user shares with
+   the chat, which is everything they have ever asked Skales to remember - their
+   notes, their people, their circumstances. Ask for it only when working on
+   that material IS the plugin, say why in your README, and expect to be asked.
+   A plugin that keeps its own notes wants `"own"`, and a card that says so is
+   a card people install.
+
    **What you may ask for.** The calendar, the address book, e-mail and the
    messengers are all open to a plugin: a small CRM that reads the week's
    appointments, writes a follow-up to a contact and ticks it off is exactly
@@ -79,6 +88,70 @@ same twelve points, in the same order.
     you": with it, Skales shows your name on the green signature line at
     install time. Generate the pair with the Skales DevKit or any ed25519
     tool; the private half never leaves your machine.
+
+## What the app gives your page
+
+A plugin page is a sandboxed document. It has no bundler, no imports, no CDN and
+no `fetch`, and `localStorage` does not survive - the app's own store does.
+Everything it can reach is on `window.skales`:
+
+```js
+window.skales.storage.get(key)         // -> Promise<value | undefined>
+window.skales.storage.set(key, value)  // -> Promise
+window.skales.storage.remove(key)      // -> Promise
+window.skales.storage.keys()           // -> Promise<string[]>
+window.skales.tools.run(name, args)    // -> Promise<result>
+```
+
+`tools.run` runs one named Skales tool. Only the names in your `permissions.tools`
+run; anything else rejects with the refusal by name. A tool the app classes as
+needing approval makes the app draw a card the user presses, and the promise
+stays pending until they answer - so show that as work in progress, never as a
+hang.
+
+**Your page is required.** A plugin whose page is missing or blank is refused
+rather than put on the shelf as an empty frame.
+
+**Your plugin's memory is its own unless it asked otherwise.** `memory_write`
+and `memory_search` reach a store beside your plugin's folder that nothing else
+reads. With `permissions.memory: "shared"` they reach the memory the user shares
+with the chat instead. Whichever it is, the same store answers your page and
+your scheduled runs, so the two halves cannot end up with different notes.
+
+**Use the app's theme, not your own colours.** The frame writes the colours the
+user actually chose into your page as seven CSS variables on `:root`:
+
+| Variable | Role |
+|---|---|
+| `--sk-bg` | the page |
+| `--sk-surface` | cards and fields |
+| `--sk-line` | borders |
+| `--sk-text` | text |
+| `--sk-muted` | secondary text |
+| `--sk-accent` | the accent the user picked |
+| `--sk-accent-text` | text that sits ON the accent |
+
+Use only those for every background, border, text and accent, and declare your
+own fallback values for the same seven names at the top of your stylesheet so
+the page also stands on its own. A hardcoded white, black or hex in one of those
+roles is the one thing that makes a plugin ignore the theme the rest of the app
+follows. Type comes from the app the same way: `font-family: inherit` rather
+than a family of your own.
+
+**A page and an agent meet in a file, never in the store.** A page reaches the
+store and an agent cannot; both reach the plugin's own folder. So a plugin whose
+page and agent share state keeps that state in a named file - `data/whatever.json`
+- written with `write_file` and read with `read_file`, and keeps the store for
+page preferences. `read_file` hands a page the file's text as `result.content`.
+Have the agent write its own files rather than `store.json`, which belongs to the
+bridge.
+
+**Tools you ask for and this build does not have are dropped, and the app now
+says which and why.** A name on the never-grantable list can never be given to a
+plugin whatever the manifest says, and a name this version has no tool for is
+usually a misspelling of one it does. Neither fails your install; both cost you
+the tool, so read what the app tells you rather than assuming the list you wrote
+is the list you got.
 
 ## Opening the PR
 

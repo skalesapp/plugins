@@ -1,1 +1,12 @@
-["com.github.skalesapp/daily-brief", "com.github.skalesapp/reading-stack"]
+[
+  "com.github.skalesapp/daily-brief",
+  "com.github.skalesapp/reading-stack",
+  "com.github.skalesapp/exposure-check",
+  "com.github.skalesapp/attachment-check",
+  "com.github.skalesapp/data-broker-exit",
+  "com.github.skalesapp/open-invoices",
+  "com.github.skalesapp/notice-radar",
+  "com.github.skalesapp/receipt-inbox",
+  "com.github.skalesapp/page-watch",
+  "com.github.skalesapp/meeting-prep"
+]

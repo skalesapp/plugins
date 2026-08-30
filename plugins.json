@@ -2,9 +2,9 @@
   {
     "id": "com.github.skalesapp/daily-brief",
     "name": "Daily Brief",
-    "version": "1.0.1",
-    "minAppVersion": "12.9.0",
-    "description": "A morning brief written while you sleep - calendar, notes and tasks into one page",
+    "version": "1.1.0",
+    "minAppVersion": "12.9.20",
+    "description": "Writes you a short morning brief at 07:30 from your calendar, the weather, your open tasks, the mail that wants an answer and your reminders.",
     "author": "Skales",
     "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
     "class": "automation",
@@ -14,9 +14,12 @@
     "permissions": {
       "network": false,
       "filesystem": "pluginRoot",
+      "memory": "shared",
       "tools": [
+        "get_weather",
         "list_calendar_events",
         "list_directory",
+        "list_emails",
         "list_scheduled_tasks",
         "list_tasks",
         "memory_search",
@@ -27,30 +30,272 @@
     "repo": "skalesapp/plugins",
     "path": "first-party/daily-brief",
     "firstParty": true,
+    "homepage": "https://skales.app",
     "addedAt": "2026-08-26"
   },
   {
     "id": "com.github.skalesapp/reading-stack",
     "name": "Reading Stack",
-    "version": "1.0.0",
-    "minAppVersion": "12.9.0",
-    "description": "A reading list that works offline - save links, let the agent summarize",
+    "version": "1.1.0",
+    "minAppVersion": "12.9.20",
+    "description": "A list of the links you meant to get back to, each with a short summary. Works offline, with no key.",
     "author": "Skales",
     "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
-    "class": "agent",
+    "class": "automation",
     "platforms": [
       "desktop"
     ],
     "permissions": {
       "network": false,
       "filesystem": "pluginRoot",
+      "memory": "own",
       "tools": [
-        "extract_web_text"
+        "extract_web_text",
+        "read_file",
+        "write_file"
       ]
     },
     "repo": "skalesapp/plugins",
     "path": "first-party/reading-stack",
     "firstParty": true,
+    "homepage": "https://skales.app",
     "addedAt": "2026-08-26"
+  },
+  {
+    "id": "com.github.skalesapp/exposure-check",
+    "name": "Exposure Check",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Checks a password against the breach corpus without sending it, and the services you use against the public breach list.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "page",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "http_request"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/exposure-check",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/attachment-check",
+    "name": "Attachment Check",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Checks a file or a link somebody sent you before you open it: the file by fingerprint, so it never leaves this machine, and the link by following it without a browser.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "page",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "extract_web_text",
+        "http_request",
+        "scan_file_virustotal"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/attachment-check",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/data-broker-exit",
+    "name": "Data Broker Exit",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Pulls the California data broker registry, drafts a removal request per broker in the right jurisdiction, and keeps the deadline on each one.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "automation",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "http_request",
+        "list_directory",
+        "list_emails",
+        "read_file",
+        "send_email",
+        "write_file"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/data-broker-exit",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/open-invoices",
+    "name": "Open Invoices",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Keeps the list of unpaid invoices, works out what is overdue, and has the reminder letter written and waiting for you to send.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "automation",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "create_task",
+        "list_directory",
+        "list_emails",
+        "read_file",
+        "send_email",
+        "write_file"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/open-invoices",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/notice-radar",
+    "name": "Notice Radar",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Every contract and subscription with its term, its notice period, and the last day you can still cancel it.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "automation",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "create_calendar_event",
+        "create_task",
+        "list_directory",
+        "read_file",
+        "write_file"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/notice-radar",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/receipt-inbox",
+    "name": "Receipt Inbox",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Collects the receipts and invoices that arrive by mail into a month sheet you can correct, export as CSV and send on.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "automation",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "list_directory",
+        "list_emails",
+        "read_file",
+        "send_email",
+        "write_file"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/receipt-inbox",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/page-watch",
+    "name": "Page Watch",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Watches web pages you name and reports what changed in their wording, prices and promises, once a week.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "automation",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "own",
+      "tools": [
+        "extract_web_text",
+        "list_directory",
+        "read_file",
+        "write_file"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/page-watch",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.skalesapp/meeting-prep",
+    "name": "Meeting Prep",
+    "version": "1.0.0",
+    "minAppVersion": "12.9.20",
+    "description": "Reads the calendar for today and tomorrow and leaves a one page briefing on each outside meeting before it starts.",
+    "author": "Skales",
+    "publicKey": "MCowBQYDK2VwAyEARaWek/rWrR7IvDDSlChFsNq8IWlvAKb6Drql78WZXi8=",
+    "class": "automation",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": false,
+      "filesystem": "pluginRoot",
+      "memory": "shared",
+      "tools": [
+        "extract_web_text",
+        "list_calendar_events",
+        "list_directory",
+        "memory_search",
+        "read_file",
+        "search_web",
+        "write_file"
+      ]
+    },
+    "repo": "skalesapp/plugins",
+    "path": "first-party/meeting-prep",
+    "firstParty": true,
+    "homepage": "https://skales.app",
+    "addedAt": "2026-08-30"
   }
 ]

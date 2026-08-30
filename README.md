@@ -49,8 +49,22 @@ never handed out again — see [SECURITY.md](./SECURITY.md).
 | [`featured.json`](./featured.json) | Ids the app highlights. Curated by maintainers. |
 | [`removed.json`](./removed.json) | Retired ids. Append-only, never reused. |
 | [`schema/plugin.schema.json`](./schema/plugin.schema.json) | The manifest schema every entry validates against. |
-| [`first-party/`](./first-party) | Plugins published by Skales, synced from the app bundle. |
+| [`first-party/`](./first-party) | Plugins published by Skales. Generated from the app bundle, never edited here. |
 | [`scripts/validate.js`](./scripts/validate.js) | The validator CI runs. Run it locally too. |
+
+## First-party plugins
+
+The entries under `first-party/` ship inside Skales itself. Their pages, their
+prompts and their prose live in the app, and their rows here, their README and
+their CHANGELOG are written out of that one source by
+`scripts/emit-first-party-registry.js` in the app repository. Two consequences
+worth knowing:
+
+- Installing one of them makes **no network call**. The registry confirms the
+  version and the metadata; the content comes out of the app. They work on a
+  fresh machine, offline, before any provider is configured.
+- Editing a file under `first-party/` here does nothing and will be overwritten.
+  The change belongs in the app.
 
 ## Disclaimer
 

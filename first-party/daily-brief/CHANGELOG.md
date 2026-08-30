@@ -1,7 +1,11 @@
 # Changelog
 
-**Placeholder.** Mirrored from the Skales app bundle, where this plugin is
-authored. Do not edit by hand - a sync overwrites it.
+## 1.1.0
+
+The brief knows what the day is like and what is waiting: it reads the weather
+and names the few mails that plainly want an answer today, by sender and
+subject. It still cannot answer, move or delete a message. A second run on the
+same day now stops instead of writing the day twice.
 
 ## 1.0.1
 
