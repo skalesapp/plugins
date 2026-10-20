@@ -297,5 +297,36 @@
     "firstParty": true,
     "homepage": "https://skales.app",
     "addedAt": "2026-08-30"
+  },
+  {
+    "id": "com.github.vivekgupta-memcode/memcode-memory",
+    "name": "MemCode Memory",
+    "version": "0.1.0",
+    "minAppVersion": "12.9.45",
+    "description": "Lets users explicitly save and recall personal MemCode memories through a signed-in MCP connection.",
+    "author": "Vivek Gupta, MemCode",
+    "class": "page",
+    "platforms": [
+      "desktop"
+    ],
+    "permissions": {
+      "network": true,
+      "filesystem": "none",
+      "memory": "own",
+      "tools": [
+        "mcp_memcode_save_memory",
+        "mcp_memcode_get_memory_ingest_status",
+        "mcp_memcode_search_memories",
+        "mcp_memcode_retrieve_answer"
+      ]
+    },
+    "business": {
+      "model": "freemium",
+      "priceUrl": "https://memcode.in/memory",
+      "vendor": "MemCode"
+    },
+    "repo": "vivekgupta-memcode/skales-memcode",
+    "homepage": "https://memcode.in/docs",
+    "addedAt": "2026-09-29"
   }
 ]
